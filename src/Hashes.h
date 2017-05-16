@@ -5,6 +5,7 @@
 #include "MurmurHash1.h"
 #include "MurmurHash2.h"
 #include "MurmurHash3.h"
+#define XXH_STATIC_LINKING_ONLY
 #include "xxhash.h"
 #include "xxhash-kernel.h"
 
@@ -97,4 +98,36 @@ inline void XXH32_kernel_test ( const void * key, int len, uint32_t seed, void *
 inline void XXH64_kernel_test ( const void * key, int len, uint32_t seed, void * out )
 {
   *(uint64_t*)out = xxh64(key, (size_t)len, (uint64_t)seed);
+}
+
+inline void XXH32_stream_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  XXH32_state_t state;
+  XXH32_reset(&state, seed);
+  XXH32_update(&state, key, (size_t)len);
+  *(uint32_t*)out = XXH32_digest(&state);
+}
+
+inline void XXH64_stream_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  XXH64_state_t state;
+  XXH64_reset(&state, seed);
+  XXH64_update(&state, key, (size_t)len);
+  *(uint64_t*)out = XXH64_digest(&state);
+}
+
+inline void XXH32_kernel_stream_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  struct xxh32_state state;
+  xxh32_reset(&state, seed);
+  xxh32_update(&state, key, (size_t)len);
+  *(uint32_t*)out = xxh32_digest(&state);
+}
+
+inline void XXH64_kernel_stream_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  struct xxh64_state state;
+  xxh64_reset(&state, seed);
+  xxh64_update(&state, key, (size_t)len);
+  *(uint64_t*)out = xxh64_digest(&state);
 }
