@@ -30,6 +30,8 @@ add_library(
   SuperFastHash.cpp
   Types.cpp
   PMurHash.c
+  xxhash.c
+  xxhash-kernel.c
 )
 
 add_executable(

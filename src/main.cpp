@@ -80,6 +80,12 @@ HashInfo g_hashes[] =
   { MurmurHash3_x64_128, 128, 0x6384BA69, "Murmur3F",    "MurmurHash3 for x64, 128-bit" },
 
   { PMurHash32_test,      32, 0xB0F57EE3, "PMurHash32",  "Shane Day's portable-ized MurmurHash3 for x86, 32-bit." },
+
+  // xxhash
+  { XXH32_test,           32, 0xBA88B743, "xxh32",       "xxHash block mode 32-bit" },
+  { XXH64_test,           64, 0x024B7CF4, "xxh64",       "xxHash block mode 64-bit" },
+  { XXH32_kernel_test,    32, 0xBA88B743, "xxh32-kernel","xxHash-kernel block mode 32-bit" },
+  { XXH64_kernel_test,    64, 0x024B7CF4, "xxh64-kernel","xxHash-kernel block mode 64-bit" },
 };
 
 HashInfo * findHash ( const char * name )

@@ -5,6 +5,8 @@
 #include "MurmurHash1.h"
 #include "MurmurHash2.h"
 #include "MurmurHash3.h"
+#include "xxhash.h"
+#include "xxhash-kernel.h"
 
 //----------
 // These are _not_ hash functions (even though people tend to use crc32 as one...)
@@ -75,4 +77,24 @@ inline void MurmurHash64A_test ( const void * key, int len, uint32_t seed, void 
 inline void MurmurHash64B_test ( const void * key, int len, uint32_t seed, void * out )
 {
   *(uint64_t*)out = MurmurHash64B(key,len,seed);
+}
+
+inline void XXH32_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  *(uint32_t*)out = XXH32(key, (size_t)len, seed);
+}
+
+inline void XXH64_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  *(uint64_t*)out = XXH64(key, (size_t)len, (uint64_t)seed);
+}
+
+inline void XXH32_kernel_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  *(uint32_t*)out = xxh32(key, (size_t)len, seed);
+}
+
+inline void XXH64_kernel_test ( const void * key, int len, uint32_t seed, void * out )
+{
+  *(uint64_t*)out = xxh64(key, (size_t)len, (uint64_t)seed);
 }
